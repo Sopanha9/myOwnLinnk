@@ -1,585 +1,1072 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Soo Panha · Links</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soo Panha — Developer &amp; Creator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-      :root {
-        --glass-bg: rgba(255, 255, 255, 0.06);
-        --glass-border: rgba(255, 255, 255, 0.14);
-        --glass-hover: rgba(255, 255, 255, 0.12);
-        --blur: blur(18px);
-        --accent1: #a78bfa;
-        --accent2: #38bdf8;
-        --accent3: #f472b6;
-      }
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #111118;
+      --text-primary: rgba(255,255,255,0.92);
+      --text-secondary: rgba(255,255,255,0.55);
+      --text-muted: rgba(255,255,255,0.3);
+      --glass-bg: rgba(255,255,255,0.07);
+      --glass-border: rgba(255,255,255,0.13);
+      --glass-hover: rgba(255,255,255,0.11);
+      --blur: blur(20px);
+      --accent: #a78bfa;
+    }
 
-      html,
-      body {
-        min-height: 100%;
-        font-family: "Space Grotesk", sans-serif;
-        background: #050510;
-        color: #e2e8f0;
-        overflow-x: hidden;
-      }
+    html, body {
+      min-height: 100%;
+      font-family: 'Sora', 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      overflow: hidden;
+    }
 
-      /* ── Particle canvas ── */
-      #particles {
-        position: fixed;
-        inset: 0;
-        z-index: 0;
-        pointer-events: none;
-      }
+    /* ═══════════════ SCROLLING BG TEXT ═══════════════ */
+    .bg-scroll {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 30%, black 80%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 30%, black 80%);
+    }
 
-      /* ── Page wrapper ── */
-      .page {
-        position: relative;
-        z-index: 2;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 60px 20px 80px;
-      }
+    .bg-scroll-row {
+      display: flex;
+      white-space: nowrap;
+      animation: scrollLeft 35s linear infinite;
+      padding: 6px 0;
+      opacity: 0.22;
+    }
+    .bg-scroll-row:nth-child(even) {
+      animation: scrollRight 40s linear infinite;
+      opacity: 0.18;
+    }
+    .bg-scroll-row:nth-child(3n) { animation-duration: 28s; }
+    .bg-scroll-row:nth-child(5n) { animation-duration: 45s; opacity: 0.14; }
 
-      /* ── Main glass card ── */
-      .card {
-        width: 100%;
-        max-width: 480px;
-        background: var(--glass-bg);
-        border: 1px solid var(--glass-border);
-        backdrop-filter: var(--blur);
-        -webkit-backdrop-filter: var(--blur);
-        border-radius: 28px;
-        padding: 48px 36px 40px;
-        box-shadow:
-          0 0 0 1px rgba(255, 255, 255, 0.04) inset,
-          0 30px 80px rgba(0, 0, 0, 0.5);
-        animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-      }
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
+    @keyframes scrollLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes scrollRight {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
 
-      /* ── Profile section ── */
-      .profile {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 36px;
-      }
+    .bg-scroll-row span {
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: var(--text-primary);
+      letter-spacing: 0.01em;
+      padding-right: 48px;
+      font-family: 'Inter', sans-serif;
+    }
 
-      .avatar-wrap {
-        position: relative;
-        width: 96px;
-        height: 96px;
-        margin-bottom: 18px;
-        border-radius: 50%;
-        padding: 3px;
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-        box-shadow:
-          0 0 0 1px rgba(255, 255, 255, 0.25),
-          0 8px 32px rgba(0, 0, 0, 0.4),
-          inset 0 1px 0 rgba(255, 255, 255, 0.3);
-      }
-      .avatar {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        overflow: hidden;
-      }
-      .avatar img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center top;
-        display: block;
-      }
+    /* ═══════════════ MAIN LAYOUT ═══════════════ */
+    .page {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-      .name {
-        font-family:
-          "Inter",
-          "SF Pro Display",
-          -apple-system,
-          BlinkMacSystemFont,
-          "Segoe UI",
-          system-ui,
-          sans-serif;
-        font-size: 1.6rem;
-        font-weight: 700;
-        letter-spacing: -0.8px;
-        color: #ffffff;
-        margin-bottom: 6px;
-        line-height: 1.1;
-      }
-      .tagline {
-        font-size: 0.85rem;
-        font-weight: 400;
-        color: rgba(255, 255, 255, 0.45);
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-      }
+    /* ═══════════════ PHONE FRAME ═══════════════ */
+    .phone-wrap {
+      position: relative;
+      width: 320px;
+      height: 680px;
+    }
 
-      /* ── Divider ── */
-      .divider {
-        height: 1px;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          var(--glass-border),
-          transparent
-        );
-        margin-bottom: 28px;
-      }
+    .phone-body {
+      position: absolute;
+      inset: 0;
+      border-radius: 42px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%);
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.06) inset,
+        0 40px 120px rgba(0,0,0,0.8),
+        0 0 60px rgba(167,139,250,0.06);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+    }
+    /* Side buttons */
+    .phone-body::before {
+      content: '';
+      position: absolute;
+      right: -3px;
+      top: 120px;
+      width: 3px;
+      height: 60px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 0 3px 3px 0;
+      box-shadow: 0 75px 0 rgba(255,255,255,0.12);
+    }
+    .phone-body::after {
+      content: '';
+      position: absolute;
+      left: -3px;
+      top: 100px;
+      width: 3px;
+      height: 36px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 3px 0 0 3px;
+      box-shadow: 0 52px 0 rgba(255,255,255,0.1), 0 96px 0 rgba(255,255,255,0.1);
+    }
 
-      /* ── Link buttons ── */
-      .links {
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-      }
+    .phone-screen {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      bottom: 8px;
+      border-radius: 36px;
+      overflow: hidden;
+      background: #0d0d14;
+    }
 
-      .link-btn {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        padding: 15px 20px;
-        background: var(--glass-bg);
-        border: 1px solid var(--glass-border);
-        border-radius: 16px;
-        text-decoration: none;
-        color: #e2e8f0;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        transition:
-          background 0.25s,
-          border-color 0.25s,
-          transform 0.2s,
-          box-shadow 0.25s;
-        animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-        position: relative;
-        overflow: hidden;
-      }
-      .link-btn::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          120deg,
-          transparent 0%,
-          rgba(255, 255, 255, 0.04) 50%,
-          transparent 100%
-        );
-        transform: translateX(-100%);
-        transition: transform 0.5s ease;
-      }
-      .link-btn:hover::before {
-        transform: translateX(100%);
-      }
-      .link-btn:hover {
-        background: var(--glass-hover);
-        border-color: rgba(255, 255, 255, 0.28);
-        transform: translateY(-2px) scale(1.01);
-        box-shadow:
-          0 8px 30px rgba(0, 0, 0, 0.35),
-          0 0 0 1px rgba(255, 255, 255, 0.08) inset;
-      }
-      .link-btn:active {
-        transform: translateY(0) scale(0.99);
-      }
+    /* Notch */
+    .phone-notch {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 24px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .phone-notch::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #1a1a24;
+      border: 1.5px solid rgba(255,255,255,0.08);
+    }
 
-      /* staggered animation delays */
-      .link-btn:nth-child(1) {
-        animation-delay: 0.15s;
-      }
-      .link-btn:nth-child(2) {
-        animation-delay: 0.22s;
-      }
-      .link-btn:nth-child(3) {
-        animation-delay: 0.29s;
-      }
-      .link-btn:nth-child(4) {
-        animation-delay: 0.36s;
-      }
-      .link-btn:nth-child(5) {
-        animation-delay: 0.43s;
-      }
-      .link-btn:nth-child(6) {
-        animation-delay: 0.5s;
-      }
+    /* Status bar */
+    .status-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 46px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 0 22px 6px;
+      z-index: 40;
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.01em;
+    }
+    .status-icons {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
 
-      .link-icon {
-        width: 42px;
-        height: 42px;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        font-size: 1.2rem;
-      }
+    /* ═══════════════ LOCKSCREEN ═══════════════ */
+    .lockscreen {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 30;
+      transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .lockscreen.unlocked {
+      opacity: 0;
+      transform: translateY(-20px);
+      pointer-events: none;
+    }
 
-      .link-label {
-        flex: 1;
-        font-size: 0.95rem;
-        font-weight: 600;
-        letter-spacing: 0.2px;
-      }
+    .lock-time-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 80px;
+      gap: 4px;
+    }
+    .lock-date {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .lock-time {
+      font-family: 'Sora', sans-serif;
+      font-weight: 200;
+      font-size: 5.5rem;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      text-shadow: 0 0 30px rgba(0,0,0,0.8), 0 0 60px rgba(0,0,0,0.5);
+    }
 
-      .link-arrow {
-        opacity: 0.35;
-        font-size: 0.9rem;
-        transition:
-          opacity 0.2s,
-          transform 0.2s;
-      }
-      .link-btn:hover .link-arrow {
-        opacity: 0.8;
-        transform: translateX(3px);
-      }
+    .lock-profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 24px;
+      gap: 8px;
+    }
+    .lock-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.25);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    }
+    .lock-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .lock-name {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
 
-      /* Per-platform icon colours */
-      .icon-telegram {
-        background: rgba(41, 182, 246, 0.18);
-        color: #29b6f6;
-        box-shadow: 0 0 14px rgba(41, 182, 246, 0.2);
-      }
-      .icon-facebook {
-        background: rgba(66, 103, 178, 0.18);
-        color: #6b98f0;
-        box-shadow: 0 0 14px rgba(66, 103, 178, 0.2);
-      }
-      .icon-youtube {
-        background: rgba(255, 70, 70, 0.18);
-        color: #ff6b6b;
-        box-shadow: 0 0 14px rgba(255, 70, 70, 0.2);
-      }
-      .icon-tiktok {
-        background: rgba(105, 240, 174, 0.15);
-        color: #69f0ae;
-        box-shadow: 0 0 14px rgba(105, 240, 174, 0.2);
-      }
-      .icon-website {
-        background: rgba(167, 139, 250, 0.18);
-        color: #a78bfa;
-        box-shadow: 0 0 14px rgba(167, 139, 250, 0.2);
-      }
-      .icon-github {
-        background: rgba(226, 232, 240, 0.12);
-        color: #e2e8f0;
-        box-shadow: 0 0 14px rgba(226, 232, 240, 0.15);
-      }
+    .lock-flex { flex: 1; }
 
-      /* ── Footer ── */
-      .footer {
-        margin-top: 28px;
-        font-size: 0.72rem;
-        color: rgba(255, 255, 255, 0.2);
-        letter-spacing: 0.5px;
-        text-align: center;
-      }
+    /* Slide to unlock */
+    .slider-wrap {
+      width: calc(100% - 40px);
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .slider-track {
+      height: 50px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 25px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      cursor: pointer;
+    }
+    .slider-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, rgba(167,139,250,0.3), rgba(56,189,248,0.2));
+      border-radius: 25px;
+      width: 50px;
+      transition: width 0.3s ease;
+    }
+    .slider-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.06em;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .slider-knob {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 42px;
+      height: 42px;
+      border-radius: 21px;
+      background: rgba(255,255,255,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .slider-knob svg { color: #333; }
 
-      /* ── Responsive ── */
-      @media (max-width: 520px) {
-        .card {
-          padding: 36px 22px 32px;
-          border-radius: 22px;
-        }
-        .name {
-          font-size: 1.35rem;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <canvas id="particles"></canvas>
+    /* ═══════════════ HOME SCREEN ═══════════════ */
+    .homescreen {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 20;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease 0.1s;
+    }
+    .homescreen.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
 
-    <main class="page">
-      <div class="card">
-        <!-- Profile -->
-        <div class="profile">
-          <div class="avatar-wrap">
-            <div class="avatar"><img src="./pf.jpg" alt="Soo Panha" /></div>
-          </div>
-          <h1 class="name">Soo Panha</h1>
-          <p class="tagline">Developer &amp; Creator</p>
+    /* Home time */
+    .home-time-bar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 56px;
+      gap: 2px;
+    }
+    .home-time-sm {
+      font-family: 'Sora', sans-serif;
+      font-weight: 300;
+      font-size: 2.2rem;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      opacity: 0.7;
+    }
+
+    /* Grid of folder icons */
+    .home-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      padding: 24px 22px 0;
+      width: 100%;
+    }
+
+    .folder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .folder-icon {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 22px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 8px;
+      padding: 14px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, background 0.2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .folder-icon::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 60%);
+      border-radius: 22px;
+    }
+    .folder:active .folder-icon {
+      transform: scale(0.95);
+    }
+    .folder-icon:hover {
+      background: var(--glass-hover);
+    }
+
+    .folder-mini {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .folder-label {
+      font-size: 0.6rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+      text-align: center;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    }
+
+    /* Dock */
+    .home-dock {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 16px 20px;
+    }
+
+    .dock-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: transform 0.2s ease;
+      position: relative;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .dock-icon:active { transform: scale(0.92); }
+
+    .dock-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: #E60000;
+      color: #fff;
+      font-size: 0.45rem;
+      font-weight: 700;
+      padding: 2px 4px;
+      border-radius: 8px;
+      min-width: 18px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(230,0,0,0.4), 0 0 0 1.5px var(--bg);
+    }
+
+    /* ═══════════════ MODAL / FOLDER OVERLAY ═══════════════ */
+    .modal-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 60;
+      display: flex;
+      flex-direction: column;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 36px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 56px 16px 16px;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .modal-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .modal-close {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      font-size: 1rem;
+    }
+
+    .modal-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .modal-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 16px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: background 0.2s, transform 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+    .modal-link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.04), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.4s ease;
+    }
+    .modal-link:hover::before { transform: translateX(100%); }
+    .modal-link:hover { background: var(--glass-hover); transform: translateY(-1px); }
+    .modal-link:active { transform: scale(0.98); }
+
+    .modal-link-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+
+    .modal-link-text { flex: 1; }
+    .modal-link-name { font-size: 0.85rem; font-weight: 600; }
+    .modal-link-sub { font-size: 0.68rem; color: var(--text-muted); margin-top: 1px; }
+
+    .modal-link-arrow {
+      opacity: 0.3;
+      font-size: 0.85rem;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .modal-link:hover .modal-link-arrow { opacity: 0.7; transform: translateX(3px); }
+
+    /* Icon colors */
+    .ic-telegram { background: rgba(41,182,246,0.18); color: #29b6f6; }
+    .ic-github { background: rgba(226,232,240,0.1); color: #e2e8f0; }
+    .ic-facebook { background: rgba(66,103,178,0.18); color: #6b98f0; }
+    .ic-youtube { background: rgba(255,70,70,0.18); color: #ff6b6b; }
+    .ic-tiktok { background: rgba(105,240,174,0.15); color: #69f0ae; }
+    .ic-portfolio { background: rgba(167,139,250,0.18); color: #a78bfa; }
+    .ic-x { background: rgba(226,232,240,0.1); color: #e2e8f0; }
+    .ic-email { background: rgba(167,139,250,0.15); color: #c4b5fd; }
+
+    /* ═══════════════ ANIMATIONS ═══════════════ */
+    .phone-enter {
+      animation: phoneIn 0.9s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes phoneIn {
+      from { opacity: 0; transform: scale(0.85) translateY(30px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Folder open animation */
+    @keyframes folderIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .modal-overlay.open { animation: folderIn 0.25s ease both; }
+
+    /* ═══════════════ HOME INDICATOR ═══════════════ */
+    .home-indicator {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 4px;
+      z-index: 100;
+    }
+
+    /* ═══════════════ RESPONSIVE ═══════════════ */
+    @media (max-height: 700px) {
+      .phone-wrap { height: 580px; width: 274px; }
+      .lock-time { font-size: 4.5rem; }
+    }
+    @media (max-width: 400px) {
+      .phone-wrap { width: 290px; height: 620px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ SCROLLING BG ═══ -->
+<div class="bg-scroll" id="bgScroll"></div>
+
+<!-- ═══ PHONE ═══ -->
+<div class="page">
+  <div class="phone-wrap phone-enter">
+    <div class="phone-body"></div>
+    <div class="phone-screen">
+
+      <!-- Status Bar -->
+      <div class="status-bar">
+        <span id="statusTime">9:41</span>
+        <div class="status-icons">
+          <svg width="14" height="10" viewBox="0 0 14 10" fill="currentColor" opacity="0.8">
+            <rect x="0" y="4" width="2" height="6" rx="0.5"/>
+            <rect x="3" y="2.5" width="2" height="7.5" rx="0.5"/>
+            <rect x="6" y="1" width="2" height="9" rx="0.5"/>
+            <rect x="9" y="0" width="2" height="10" rx="0.5"/>
+          </svg>
+          <svg width="13" height="10" viewBox="0 0 13 10" fill="currentColor" opacity="0.8">
+            <path d="M6.5 2C4.5 2 2.7 2.8 1.4 4.1L0 2.7C1.7 1 4 0 6.5 0S11.3 1 13 2.7L11.6 4.1C10.3 2.8 8.5 2 6.5 2z"/>
+            <path d="M6.5 5c-1 0-1.9.4-2.6 1L2.5 4.6C3.6 3.6 4.9 3 6.5 3s2.9.6 4 1.6L9.1 6C8.4 5.4 7.5 5 6.5 5z"/>
+            <circle cx="6.5" cy="8" r="1.5"/>
+          </svg>
+          <svg width="22" height="11" viewBox="0 0 22 11" fill="currentColor" opacity="0.8">
+            <rect x="0.5" y="0.5" width="18" height="10" rx="2.5" stroke="currentColor" stroke-opacity="0.35" fill="none"/>
+            <rect x="1.5" y="1.5" width="13" height="8" rx="1.5" fill="currentColor"/>
+            <path d="M19.5 3.5v4c1.1-.4 1.5-1 1.5-2s-.4-1.6-1.5-2z" fill="currentColor" opacity="0.4"/>
+          </svg>
         </div>
-
-        <div class="divider"></div>
-
-        <!-- Links -->
-        <nav class="links">
-          <!-- Telegram -->
-          <a
-            class="link-btn"
-            href="https://t.me/S_Pnha"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div class="link-icon icon-telegram">
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
-                />
-              </svg>
-            </div>
-            <span class="link-label">Telegram</span>
-            <span class="link-arrow">›</span>
-          </a>
-
-          <!-- GitHub -->
-          <a
-            class="link-btn"
-            href="https://github.com/Sopanha9"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div class="link-icon icon-github">
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
-                />
-              </svg>
-            </div>
-            <span class="link-label">GitHub</span>
-            <span class="link-arrow">›</span>
-          </a>
-
-          <!-- Facebook -->
-          <a
-            class="link-btn"
-            href="https://www.facebook.com/SooPanha999"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div class="link-icon icon-facebook">
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
-                />
-              </svg>
-            </div>
-            <span class="link-label">Facebook</span>
-            <span class="link-arrow">›</span>
-          </a>
-
-          <!-- YouTube -->
-          <a
-            class="link-btn"
-            href="https://www.youtube.com/@Pdev9"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div class="link-icon icon-youtube">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
-                />
-              </svg>
-            </div>
-            <span class="link-label">YouTube</span>
-            <span class="link-arrow">›</span>
-          </a>
-
-          <!-- TikTok -->
-          <a
-            class="link-btn"
-            href="https://www.tiktok.com/@panhabruh99"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div class="link-icon icon-tiktok">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34l-.01-8.84a8.15 8.15 0 0 0 4.77 1.53V4.56a4.85 4.85 0 0 1-1-.13z"
-                />
-              </svg>
-            </div>
-            <span class="link-label">TikTok</span>
-            <span class="link-arrow">›</span>
-          </a>
-
-          <!-- Portfolio -->
-          <a
-            class="link-btn"
-            href="https://p-devportfolio.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div class="link-icon icon-website">
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <line x1="2" y1="12" x2="22" y2="12" />
-                <path
-                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-                />
-              </svg>
-            </div>
-            <span class="link-label">Portfolio Website</span>
-            <span class="link-arrow">›</span>
-          </a>
-        </nav>
       </div>
 
-      <p class="footer">© 2026 Soo Panha · Built with 💜</p>
-    </main>
+      <!-- Notch -->
+      <div class="phone-notch"></div>
 
-    <script>
-      (function () {
-        const canvas = document.getElementById("particles");
-        const ctx = canvas.getContext("2d");
+      <!-- ═══ LOCKSCREEN ═══ -->
+      <div class="lockscreen" id="lockscreen">
+        <div class="lock-time-wrap">
+          <span class="lock-date" id="lockDate">Monday, April 20</span>
+          <div class="lock-time" id="lockTime">9:41</div>
+        </div>
 
-        // Accent palette matching CSS variables
-        const COLORS = ["#a78bfa", "#38bdf8", "#f472b6", "#818cf8", "#67e8f9"];
-        const COUNT = 90;
-        const MAX_DIST = 130; // line-drawing threshold (px)
-        const SPEED = 0.4;
+        <div class="lock-profile">
+          <div class="lock-avatar"><img src="./pf.jpg" alt="Soo Panha" /></div>
+          <span class="lock-name">Soo Panha</span>
+        </div>
 
-        let W,
-          H,
-          mouse = { x: -9999, y: -9999 };
+        <div class="lock-flex"></div>
 
-        function resize() {
-          W = canvas.width = window.innerWidth;
-          H = canvas.height = window.innerHeight;
-        }
-        resize();
-        window.addEventListener("resize", resize);
+        <div class="slider-wrap">
+          <div class="slider-track" id="sliderTrack">
+            <div class="slider-fill" id="sliderFill"></div>
+            <div class="slider-text" id="sliderText">slide to unlock</div>
+            <div class="slider-knob" id="sliderKnob">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        window.addEventListener("mousemove", (e) => {
-          mouse.x = e.clientX;
-          mouse.y = e.clientY;
-        });
-        window.addEventListener("mouseleave", () => {
-          mouse.x = -9999;
-          mouse.y = -9999;
-        });
+      <!-- ═══ HOMESCREEN ═══ -->
+      <div class="homescreen" id="homescreen">
+        <div class="home-time-bar">
+          <div class="home-time-sm" id="homeTime">9:41</div>
+        </div>
 
-        // Build particles
-        const particles = Array.from({ length: COUNT }, () => ({
-          x: Math.random() * window.innerWidth,
-          y: Math.random() * window.innerHeight,
-          vx: (Math.random() - 0.5) * SPEED,
-          vy: (Math.random() - 0.5) * SPEED,
-          r: Math.random() * 1.8 + 0.8,
-          color: COLORS[Math.floor(Math.random() * COLORS.length)],
-          alpha: Math.random() * 0.5 + 0.3,
-        }));
+        <div class="home-grid">
+          <!-- Folder: Social -->
+          <div class="folder" onclick="openFolder('social')">
+            <div class="folder-icon">
+              <div class="folder-mini">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2H3v16h5l3 3 3-3h7V2z"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="14" y2="12"/></svg>
+              </div>
+              <div class="folder-mini">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42C1 8.14 1 11.67 1 11.67s0 3.53.46 5.25a2.78 2.78 0 001.95 1.95C5.12 19.34 12 19.34 12 19.34s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95C23 15.2 23 11.67 23 11.67s0-3.53-.46-5.25z"/><polygon points="9.75 15.02 15.5 11.67 9.75 8.32 9.75 15.02"/></svg>
+              </div>
+              <div class="folder-mini">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="folder-mini">
+                <svg width="15" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34l-.01-8.84a8.15 8.15 0 004.77 1.53V4.56a4.85 4.85 0 01-1-.13z"/></svg>
+              </div>
+            </div>
+            <span class="folder-label">Social</span>
+          </div>
 
-        function draw() {
-          ctx.clearRect(0, 0, W, H);
+          <!-- Folder: Dev -->
+          <div class="folder" onclick="openFolder('dev')">
+            <div class="folder-icon">
+              <div class="folder-mini">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <div class="folder-mini">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              </div>
+              <div class="folder-mini">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+              </div>
+              <div class="folder-mini">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+            </div>
+            <span class="folder-label">Dev</span>
+          </div>
 
-          // Update positions
-          for (const p of particles) {
-            p.x += p.vx;
-            p.y += p.vy;
-            if (p.x < 0 || p.x > W) p.vx *= -1;
-            if (p.y < 0 || p.y > H) p.vy *= -1;
+          <!-- Folder: Content -->
+          <div class="folder" onclick="openFolder('content')">
+            <div class="folder-icon">
+              <div class="folder-mini">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+              </div>
+              <div class="folder-mini">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              </div>
+              <div class="folder-mini">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
+              </div>
+              <div class="folder-mini">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+              </div>
+            </div>
+            <span class="folder-label">Content</span>
+          </div>
 
-            // Gentle attraction toward mouse
-            const dx = mouse.x - p.x;
-            const dy = mouse.y - p.y;
-            const d = Math.sqrt(dx * dx + dy * dy);
-            if (d < 180 && d > 0) {
-              p.x += (dx / d) * 0.35;
-              p.y += (dy / d) * 0.35;
-            }
-          }
+          <!-- Folder: Contact -->
+          <div class="folder" onclick="openFolder('contact')">
+            <div class="folder-icon">
+              <div class="folder-mini">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2H3v16h5l3 3 3-3h7V2z"/></svg>
+              </div>
+              <div class="folder-mini">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div class="folder-mini">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.09 8.81 19.79 19.79 0 01.05 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              </div>
+              <div class="folder-mini">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+            </div>
+            <span class="folder-label">Contact</span>
+          </div>
+        </div>
 
-          // Draw connection lines
-          for (let i = 0; i < particles.length; i++) {
-            const a = particles[i];
-            for (let j = i + 1; j < particles.length; j++) {
-              const b = particles[j];
-              const dx = a.x - b.x;
-              const dy = a.y - b.y;
-              const dist = Math.sqrt(dx * dx + dy * dy);
-              if (dist < MAX_DIST) {
-                const opacity = (1 - dist / MAX_DIST) * 0.25;
-                ctx.beginPath();
-                ctx.moveTo(a.x, a.y);
-                ctx.lineTo(b.x, b.y);
-                ctx.strokeStyle = a.color;
-                ctx.globalAlpha = opacity;
-                ctx.lineWidth = 0.8;
-                ctx.stroke();
-              }
-            }
-          }
+        <!-- Dock -->
+        <div class="home-dock">
+          <a href="https://t.me/S_Pnha" target="_blank" rel="noopener" class="dock-icon" aria-label="Telegram">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          </a>
+          <a href="https://github.com/Sopanha9" target="_blank" rel="noopener" class="dock-icon" aria-label="GitHub">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@Pdev9" target="_blank" rel="noopener" class="dock-icon" aria-label="YouTube">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="4"/><polygon points="10 8.5 16 12 10 15.5 10 8.5"/></svg>
+            <span class="dock-badge">New</span>
+          </a>
+          <a href="mailto:sopanha@example.com" class="dock-icon" aria-label="Email">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
 
-          // Draw dots
-          for (const p of particles) {
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = p.color;
-            ctx.globalAlpha = p.alpha;
-            ctx.fill();
-          }
+        <!-- Home indicator -->
+        <div class="home-indicator"></div>
+      </div>
 
-          ctx.globalAlpha = 1;
-          requestAnimationFrame(draw);
-        }
+      <!-- ═══ FOLDER MODALS ═══ -->
+      <div class="modal-overlay" id="modal-social">
+        <div class="modal-header">
+          <span class="modal-title">Social</span>
+          <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-links">
+          <a href="https://t.me/S_Pnha" target="_blank" rel="noopener" class="modal-link">
+            <div class="modal-link-icon ic-telegram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            </div>
+            <div class="modal-link-text">
+              <div class="modal-link-name">Telegram</div>
+              <div class="modal-link-sub">@S_Pnha</div>
+            </div>
+            <span class="modal-link-arrow">›</span>
+          </a>
+          <a href="https://www.facebook.com/SooPanha999" target="_blank" rel="noopener" class="modal-link">
+            <div class="modal-link-icon ic-facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </div>
+            <div class="modal-link-text">
+              <div class="modal-link-name">Facebook</div>
+              <div class="modal-link-sub">SooPanha999</div>
+            </div>
+            <span class="modal-link-arrow">›</span>
+          </a>
+          <a href="https://www.tiktok.com/@panhabruh99" target="_blank" rel="noopener" class="modal-link">
+            <div class="modal-link-icon ic-tiktok">
+              <svg width="16" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34l-.01-8.84a8.15 8.15 0 004.77 1.53V4.56a4.85 4.85 0 01-1-.13z"/></svg>
+            </div>
+            <div class="modal-link-text">
+              <div class="modal-link-name">TikTok</div>
+              <div class="modal-link-sub">@panhabruh99</div>
+            </div>
+            <span class="modal-link-arrow">›</span>
+          </a>
+        </div>
+      </div>
 
-        draw();
-      })();
-    </script>
-  </body>
+      <div class="modal-overlay" id="modal-dev">
+        <div class="modal-header">
+          <span class="modal-title">Dev</span>
+          <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-links">
+          <a href="https://github.com/Sopanha9" target="_blank" rel="noopener" class="modal-link">
+            <div class="modal-link-icon ic-github">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </div>
+            <div class="modal-link-text">
+              <div class="modal-link-name">GitHub</div>
+              <div class="modal-link-sub">Sopanha9</div>
+            </div>
+            <span class="modal-link-arrow">›</span>
+          </a>
+          <a href="https://p-devportfolio.vercel.app/" target="_blank" rel="noopener" class="modal-link">
+            <div class="modal-link-icon ic-portfolio">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            </div>
+            <div class="modal-link-text">
+              <div class="modal-link-name">Portfolio</div>
+              <div class="modal-link-sub">p-devportfolio.vercel.app</div>
+            </div>
+            <span class="modal-link-arrow">›</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="modal-overlay" id="modal-content">
+        <div class="modal-header">
+          <span class="modal-title">Content</span>
+          <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-links">
+          <a href="https://www.youtube.com/@Pdev9" target="_blank" rel="noopener" class="modal-link">
+            <div class="modal-link-icon ic-youtube">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </div>
+            <div class="modal-link-text">
+              <div class="modal-link-name">YouTube</div>
+              <div class="modal-link-sub">@Pdev9</div>
+            </div>
+            <span class="modal-link-arrow">›</span>
+          </a>
+          <a href="https://www.tiktok.com/@panhabruh99" target="_blank" rel="noopener" class="modal-link">
+            <div class="modal-link-icon ic-tiktok">
+              <svg width="14" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34l-.01-8.84a8.15 8.15 0 004.77 1.53V4.56a4.85 4.85 0 01-1-.13z"/></svg>
+            </div>
+            <div class="modal-link-text">
+              <div class="modal-link-name">TikTok</div>
+              <div class="modal-link-sub">@panhabruh99</div>
+            </div>
+            <span class="modal-link-arrow">›</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="modal-overlay" id="modal-contact">
+        <div class="modal-header">
+          <span class="modal-title">Contact</span>
+          <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-links">
+          <a href="https://t.me/S_Pnha" target="_blank" rel="noopener" class="modal-link">
+            <div class="modal-link-icon ic-telegram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            </div>
+            <div class="modal-link-text">
+              <div class="modal-link-name">Telegram</div>
+              <div class="modal-link-sub">@S_Pnha</div>
+            </div>
+            <span class="modal-link-arrow">›</span>
+          </a>
+          <a href="https://www.facebook.com/SooPanha999" target="_blank" rel="noopener" class="modal-link">
+            <div class="modal-link-icon ic-facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </div>
+            <div class="modal-link-text">
+              <div class="modal-link-name">Facebook</div>
+              <div class="modal-link-sub">SooPanha999</div>
+            </div>
+            <span class="modal-link-arrow">›</span>
+          </a>
+        </div>
+      </div>
+
+    </div><!-- end phone-screen -->
+  </div><!-- end phone-wrap -->
+</div><!-- end page -->
+
+<script>
+// ═══ SCROLLING BG TEXT ═══
+const quotes = [
+  '"Building things that matter." — Soo Panha',
+  '"Code is poetry written for machines." ',
+  '"Ship fast, learn faster."',
+  '"Developer & Creator — Soo Panha"',
+  '"Every great product starts with a single commit."',
+  '"The best tutorial is one you build yourself."',
+  '"From ideas to deployed apps."',
+  '"Clean code, clean design."',
+  '"Debugging is just problem-solving in disguise."',
+  '"@Pdev9 on YouTube — Dev tutorials & builds"',
+  '"Passionate about Flutter, Spring Boot & more."',
+  '"Full-stack by day, creator by night."',
+  '"Soo Panha — Developer & Creator"',
+  '"Open source. Open mind."',
+  '"Always be building."',
+  '"Learning in public."',
+  '"What you build defines you."',
+  '"Consistency beats perfection."',
+  '"github.com/Sopanha9"',
+  '"Every line of code is a decision."',
+];
+
+const bg = document.getElementById('bgScroll');
+const ROWS = 10;
+for (let i = 0; i < ROWS; i++) {
+  const row = document.createElement('div');
+  row.className = 'bg-scroll-row';
+  // Duplicate content for seamless loop
+  const rowQuotes = [...quotes].sort(() => Math.random() - 0.5);
+  const text = rowQuotes.join('   ·   ') + '   ·   ' + rowQuotes.join('   ·   ');
+  row.innerHTML = `<span>${text}</span>`;
+  bg.appendChild(row);
+}
+
+// ═══ CLOCK ═══
+function updateTime() {
+  const now = new Date();
+  const h = now.getHours().toString().padStart(2, '0');
+  const m = now.getMinutes().toString().padStart(2, '0');
+  const timeStr = `${h}:${m}`;
+  
+  document.getElementById('lockTime').textContent = timeStr;
+  document.getElementById('homeTime').textContent = timeStr;
+  document.getElementById('statusTime').textContent = timeStr;
+  
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const dateStr = `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}`;
+  document.getElementById('lockDate').textContent = dateStr;
+}
+updateTime();
+setInterval(updateTime, 1000);
+
+// ═══ SLIDE TO UNLOCK ═══
+const knob = document.getElementById('sliderKnob');
+const track = document.getElementById('sliderTrack');
+const fill = document.getElementById('sliderFill');
+const sliderText = document.getElementById('sliderText');
+const lockscreen = document.getElementById('lockscreen');
+const homescreen = document.getElementById('homescreen');
+
+let dragging = false;
+let startX = 0;
+let knobX = 0;
+let maxX = 0;
+
+function getMaxX() {
+  return track.offsetWidth - knob.offsetWidth - 8;
+}
+
+function startDrag(clientX) {
+  dragging = true;
+  startX = clientX - knobX;
+  maxX = getMaxX();
+  knob.style.transition = 'none';
+  fill.style.transition = 'none';
+}
+
+function moveDrag(clientX) {
+  if (!dragging) return;
+  let x = clientX - startX;
+  x = Math.max(0, Math.min(x, maxX));
+  knobX = x;
+  knob.style.transform = `translateX(${x}px)`;
+  fill.style.width = `${x + knob.offsetWidth + 4}px`;
+  const progress = x / maxX;
+  sliderText.style.opacity = 1 - progress * 2;
+  if (x >= maxX * 0.9) unlock();
+}
+
+function endDrag() {
+  if (!dragging) return;
+  dragging = false;
+  if (knobX < getMaxX() * 0.9) {
+    knobX = 0;
+    knob.style.transition = 'transform 0.4s cubic-bezier(0.34,1.56,0.64,1)';
+    fill.style.transition = 'width 0.4s ease';
+    knob.style.transform = 'translateX(0px)';
+    fill.style.width = '50px';
+    sliderText.style.opacity = '1';
+  }
+}
+
+function unlock() {
+  dragging = false;
+  knob.style.transform = `translateX(${getMaxX()}px)`;
+  fill.style.width = '100%';
+  setTimeout(() => {
+    lockscreen.classList.add('unlocked');
+    homescreen.classList.add('active');
+  }, 200);
+}
+
+// Touch
+knob.addEventListener('touchstart', e => { e.preventDefault(); startDrag(e.touches[0].clientX); }, { passive: false });
+document.addEventListener('touchmove', e => { if (dragging) { e.preventDefault(); moveDrag(e.touches[0].clientX); } }, { passive: false });
+document.addEventListener('touchend', endDrag);
+
+// Mouse
+knob.addEventListener('mousedown', e => { e.preventDefault(); startDrag(e.clientX); });
+document.addEventListener('mousemove', e => { if (dragging) moveDrag(e.clientX); });
+document.addEventListener('mouseup', endDrag);
+
+// Click on track also unlocks
+track.addEventListener('click', () => unlock());
+
+// ═══ FOLDER MODALS ═══
+function openFolder(name) {
+  closeModal();
+  const modal = document.getElementById('modal-' + name);
+  if (modal) {
+    setTimeout(() => modal.classList.add('open'), 10);
+  }
+}
+
+function closeModal() {
+  document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open'));
+}
+
+// Close on backdrop click (outside links)
+document.querySelectorAll('.modal-overlay').forEach(modal => {
+  modal.addEventListener('click', e => {
+    if (e.target === modal) closeModal();
+  });
+});
+</script>
+</body>
 </html>
